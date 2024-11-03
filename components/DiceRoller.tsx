@@ -46,7 +46,7 @@ export function DiceRoller() {
   };
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-4 h-screen">
       <div className="flex items-center gap-2">
         <Dices className="w-6 h-6" />
         <h2 className="text-2xl font-bold">Multi-Dice Roller</h2>
@@ -82,7 +82,7 @@ export function DiceRoller() {
       </div>
 
       <div
-        className="w-full h-4/5 grid gap-4"
+        className="w-full h-1/2 grid gap-4"
         style={{
           gridTemplateColumns: `repeat(${getGridCols(
             diceCount
@@ -92,35 +92,34 @@ export function DiceRoller() {
         {Array(diceCount)
           .fill(0)
           .map((_, index) => (
-            <div
-              key={index}
-              className="aspect-square bg-transparent rounded-lg overflow-hidden"
-            >
-              <Canvas
-                camera={{ position: [0, 2, 5], fov: 40 }}
-                className="w-full h-full"
-                shadows
-              >
-                <ambientLight intensity={0.7} />
-                <pointLight
-                  position={[10, 10, 10]}
-                  intensity={0.8}
-                  castShadow
-                />
-                <pointLight position={[-10, -10, -10]} intensity={0.5} />
-                <directionalLight
-                  position={[5, 5, 5]}
-                  intensity={0.5}
-                  castShadow
-                />
-                <Dice rolling={rolling} result={results[index]} />
-                <OrbitControls
-                  enableZoom={false}
-                  enablePan={false}
-                  minPolarAngle={Math.PI / 4}
-                  maxPolarAngle={Math.PI / 2}
-                />
-              </Canvas>
+            <div key={index} className="">
+              <div className="aspect-square bg-transparent rounded-lg overflow-hidden">
+                <Canvas
+                  camera={{ position: [0, 2, 5], fov: 40 }}
+                  className="w-full h-full"
+                  shadows
+                >
+                  <ambientLight intensity={0.7} />
+                  <pointLight
+                    position={[10, 10, 10]}
+                    intensity={0.8}
+                    castShadow
+                  />
+                  <pointLight position={[-10, -10, -10]} intensity={0.5} />
+                  <directionalLight
+                    position={[5, 5, 5]}
+                    intensity={0.5}
+                    castShadow
+                  />
+                  <Dice rolling={rolling} result={results[index]} />
+                  <OrbitControls
+                    enableZoom={false}
+                    enablePan={false}
+                    minPolarAngle={Math.PI / 4}
+                    maxPolarAngle={Math.PI / 2}
+                  />
+                </Canvas>
+              </div>
             </div>
           ))}
       </div>

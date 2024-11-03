@@ -16,10 +16,16 @@ const faceRotations = {
 };
 
 // Component for creating a dot
-const Dot = ({ position }: { position: [number, number, number] }) => (
+const Dot = ({
+  position,
+  isSelected,
+}: {
+  position: [number, number, number];
+  isSelected: boolean;
+}) => (
   <mesh position={position}>
     <circleGeometry args={[0.15, 32]} />
-    <meshStandardMaterial color="black" />
+    <meshStandardMaterial color={isSelected ? "red" : "black"} />
   </mesh>
 );
 
@@ -28,14 +34,16 @@ const DiceFace = ({
   dots,
   position,
   rotation = [0, 0, 0],
+  isSelected = false,
 }: {
   dots: [number, number, number][];
   position: [number, number, number];
   rotation: [number, number, number];
+  isSelected: boolean;
 }) => (
   <group position={position} rotation={rotation}>
     {dots.map((pos, index) => (
-      <Dot key={index} position={pos} />
+      <Dot key={index} position={pos} isSelected={isSelected} />
     ))}
   </group>
 );
@@ -89,6 +97,7 @@ export function Dice({
         position={[0, 0, 1.01]}
         rotation={[0, 0, 0]}
         dots={[[0, 0, 0]]}
+        isSelected={result === 1}
       />
 
       {/* Face 2 (Right) */}
@@ -99,6 +108,7 @@ export function Dice({
           [-0.35, 0.35, 0],
           [0.35, -0.35, 0],
         ]}
+        isSelected={result === 2}
       />
 
       {/* Face 3 (Top) */}
@@ -110,6 +120,7 @@ export function Dice({
           [0, 0, 0],
           [0.5, 0.5, 0],
         ]}
+        isSelected={result === 3}
       />
 
       {/* Face 4 (Bottom) */}
@@ -122,6 +133,7 @@ export function Dice({
           [0.35, -0.35, 0],
           [0.35, 0.35, 0],
         ]}
+        isSelected={result === 4}
       />
 
       {/* Face 5 (Left) */}
@@ -135,6 +147,7 @@ export function Dice({
           [0.5, -0.5, 0],
           [0.5, 0.5, 0],
         ]}
+        isSelected={result === 5}
       />
 
       {/* Face 6 (Back) */}
@@ -149,6 +162,7 @@ export function Dice({
           [0.35, 0, 0],
           [0.35, 0.6, 0],
         ]}
+        isSelected={result === 6}
       />
     </animated.group>
   );
